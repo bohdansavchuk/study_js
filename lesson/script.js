@@ -1,11 +1,33 @@
-let money = 100;
-let income = "hello";
-let addExpences = 25;
-let deposit = 97;
-let mission = "to do somthing";
-let period = [01, 02, 03];
+let money = 1500;
 
-alert('Hello world!');
+console.log(typeof(money));
 
-console.log('Are you ready!');
+let income = "freelace";
+
+console.log(typeof(income));
+
+let addExpences = "Internet, Books, Car";
+
+console.log(addExpences.length);
+
+let arr = addExpences.toLowerCase().split(", ");
+
+console.log(arr);
+
+let deposit = true;
+
+console.log(typeof(deposit));
+
+let mission = 5000;
+
+console.log("Цель заработать " + mission + " долларов");  
+
+let period = 12;   
+
+console.log("Период равен " + period + " месяцев");   
+
+let budgetDay = money / 30;
+
+console.log(budgetDay);
+
 
