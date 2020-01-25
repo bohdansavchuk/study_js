@@ -1,33 +1,18 @@
-let money = 1500;
+let num = 266219;
 
-console.log(typeof(money));
+let str = String(num);
 
-let income = "freelace";
+let arr = str.split('');
 
-console.log(typeof(income));
+let result = 1;
 
-let addExpences = "Internet, Books, Car";
+for ( let i = 0; i < arr.length; i++) {
+    result *= arr[i];
+}
 
-console.log(addExpences.length);
+let p = result ** 3;
 
-let arr = addExpences.toLowerCase().split(", ");
+let final = String(p);
 
-console.log(arr);
-
-let deposit = true;
-
-console.log(typeof(deposit));
-
-let mission = 5000;
-
-console.log("Цель заработать " + mission + " долларов");  
-
-let period = 12;   
-
-console.log("Период равен " + period + " месяцев");   
-
-let budgetDay = money / 30;
-
-console.log(budgetDay);
-
+console.log(final.substring(0, 2));
 
