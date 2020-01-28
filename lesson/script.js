@@ -1,42 +1,43 @@
 "use strict";
 
-// let money = 1500;
-let income = "freelace";
-let addExpences = "Internet, Books, Car";
-let arr = addExpences.toLowerCase().split(", ");
-// let deposit = true;
-let mission = 120000;
-let period = 12;  
+// if
 
-let money = prompt("Ваш месячный доход?");
-let addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
-let deposit = confirm("Есть ли у вас депозит в банке?");
-let expenses1 = prompt("Введите обязательную статью расходов?");
-let amount1 = +prompt("Во сколько это обойдется?");
-let expenses2 = prompt("Введите обязательную статью расходов?");
-let amount2 = +prompt("Во сколько это обойдется?");
-let budgetMonth = +money - (amount1 + amount2);
-let target = Math.ceil(mission / budgetMonth); 
-let budgetDay = Math.floor(budgetMonth / 30);
-
-console.log(typeof(money));
-console.log(typeof(income));
-console.log(typeof(deposit));
-console.log(addExpences.length);
-console.log(arr);
-console.log("Цель заработать " + mission + " гривен");  
-console.log("Период равен " + period + " месяцев");   
-console.log("Бюджет на месяц " + budgetMonth);
-console.log("Цель будет достигнута за " + target + " месяцев");
-console.log("Бюджет на день: " + budgetDay);
-
-if (budgetDay >= 1200) {
-    console.log("У вас высокий уровень дохода");
-} else if ((budgetDay >= 600) && (budgetDay < 1200)) {
-    console.log("У вас средний уровень дохода");
-} else if ((budgetDay < 600) && (budgetDay >= 0)) {
-    console.log("К сожалению у вас уровень дохода ниже среднего");
-} else {
-    console.log("Что то пошло не так");
+let lang = 'en';
+if (lang === 'ru') {
+    let arr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+    console.log(arr);
 }
+if (lang === 'en') {
+    let arr = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
+    console.log(arr);
+}
+
+// switch-case
+
+let lang1 = 'ru';
+switch (lang1) {
+	case 'ru':
+        let arr1 = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+        console.log(arr1);
+	break;
+	case 'en':
+        let arr2 = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
+        console.log(arr2);
+	break;
+}
+
+// многомерный масив
+
+let lang2 = 'en';
+let arrey = {
+	'ru':['пн', 'вт', 'ср','чт', 'пт', 'сб', 'вс'],
+	'en':['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn']
+};
+console.log(arrey[lang2]);
+
+let namePerson = "я";
+
+let person = (namePerson === "Артем") ? console.log("директор") : 
+(namePerson === "Максим") ? console.log("преподаватель") : 
+console.log("студент");
 
