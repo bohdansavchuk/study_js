@@ -1,43 +1,18 @@
 "use strict";
 
-// if
-
-let lang = 'en';
-if (lang === 'ru') {
-    let arr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-    console.log(arr);
-}
-if (lang === 'en') {
-    let arr = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
-    console.log(arr);
-}
-
-// switch-case
-
-let lang1 = 'ru';
-switch (lang1) {
-	case 'ru':
-        let arr1 = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-        console.log(arr1);
-	break;
-	case 'en':
-        let arr2 = ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'];
-        console.log(arr2);
-	break;
-}
-
-// многомерный масив
-
-let lang2 = 'en';
-let arrey = {
-	'ru':['пн', 'вт', 'ср','чт', 'пт', 'сб', 'вс'],
-	'en':['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn']
+let getString = function(a) {
+    if (typeof(a) !== "string") {
+        return ("It's not a string!");
+    } else if (a.length > 30) {
+        let stringClear = a.trim();
+        let sliceString = stringClear.slice(0, 30);     
+        let finalString = sliceString + "...";  
+        return finalString;
+    } else if (a.length < 30){
+        let stringClear = a.trim();
+        return stringClear;
+    }
 };
-console.log(arrey[lang2]);
 
-let namePerson = "я";
-
-let person = (namePerson === "Артем") ? console.log("директор") : 
-(namePerson === "Максим") ? console.log("преподаватель") : 
-console.log("студент");
+console.log(getString("    lllllvvvvvvvvvvvvvvvvgggggggggggggghhhhhhh   "));
 
