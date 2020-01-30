@@ -1,25 +1,39 @@
 "use strict";
 
-// первое задание
+let isNumber = function(a) {
+    return !isNaN(parseFloat(a)) && isFinite(a);
+}; 
 
-let arr = ['642', '274', '389', '5789', '4767', '4478', '1344'];
+function guess() {
 
-for (let i = 0; i < arr.length; i++) {
-    if (arr[i].startsWith('2') || arr[i].startsWith('4')) {
-        console.log(arr[i]);
-    }
-}
+  let n = 88;
+  
+  function income() {
 
-// второе задание
+      let start = prompt("Угадай число от 1 до 100");
 
-let n = 100;
-
-run:
-for (let i = 2; i <= n; i++) {
-
-  for (let j = 2; j < i; j++) {
-    if (i % j === 0) continue run;
+      if (+start > n) {
+          alert("Загаданное число меньше");
+          income();
+      }
+      if (+start < n && start !== null) {
+          alert("Загаданное число больше");
+          income();
+      }
+      if (!isNumber(+start)) {
+          alert("Введи число!");
+          income();
+      }
+      if (start === null) {
+          return;
+      }
+      if (+start === n) {
+          return;
+      } 
   }
-  console.log("Делители этого числа: 1 и " + i);
+  
+  return income();   
 }
+
+guess();
 
