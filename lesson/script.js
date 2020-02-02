@@ -1,68 +1,84 @@
 "use strict";
 
-let isNumber = function(a) {
-    return !isNaN(parseFloat(a)) && isFinite(a);
-}; 
+let isNumber = function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
 
-function guess() {
-
-    let n = 88;
-    let count = 10;
-
-    function income() {
-
-        let start = prompt("Угадай число от 1 до 100");
-
-        if (start === null) {
-            alert ("До скорой встречи!");
-            return;
+let money,
+    start = function () {
+        do {
+            money = prompt("Ваш месячный доход?");
         }
+        while (!isNumber(money));
+    };
 
-        start = start.trim();
+start();
 
-        if (!isNumber(+start) || start === "") {
-            alert("Введи число!");
-            return income();
-        }
-        
-        count--; 
+let appData = {
+    income: {},
+    addIncome: [],
+    expenses: {},
+    addExpenses : [],
+    deposit: false,
+    mission: 120000,
+    period: 12,
+    budget: money,
+    budgetDay: 0,
+    budgetMonth: 0,
+    expensesMonth: 0,
+    expensesQuestion: [],
+    asking: function(){
+        let addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
+            appData.addExpenses = addExpenses.toLowerCase().split(", ");
+            appData.deposit = confirm("Есть ли у вас депозит в банке?");
 
-        if (+start === n) {
-            if (!confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?")) {
-                alert ("До скорой встречи!");
-                return;
-            } else {
-                count = 10;
-                n = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
-                return income();
-            } 
-        } 
-
-        if (count === 0){
-            if (!confirm("Попытки закончились, хотите сыграть еще?")) {
-                alert ("До скорой встречи!");
-                return;
-            } else {
-                count = 10;
-                return income();
-            }
-        }
-
-        if (+start > n) {
-            alert("Загаданное число меньше, у вас осталось " + count + " попыток");
-            return income();
-        }
-
-        if (+start < n && start !== null) {
-            alert("Загаданное число больше, у вас осталось " + count + " попыток");
-            return income();
-        }
-      
-    }
-
-    return income();
+            for (let i = 0; i < 2; i++) {
+            
+                appData.expensesQuestion[i] = prompt("Введите обязательную статью расходов?");
+                
+                let amount = prompt("Во сколько это обойдется?");
     
-}
+                while (!isNumber(amount)) {
+                    amount = prompt("Во сколько это обойдется?");
+                }
+    
+                appData.expenses[appData.expensesQuestion[i]] = +amount;
+            }
+    },
+    getExpensesMonth: function(){
+        for (let key in appData.expenses) {
+            appData.expensesMonth += appData.expenses[key];
+        }
+    },
+    getBudget: function(){
+        appData.budgetMonth = appData.budget - appData.expensesMonth;
+        appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+    },
+    getTargetMonth: function(){
+        return Math.ceil(appData.mission / appData.budgetMonth);
+    },
+    getStatusIncome: function(){
+        if (appData.budgetDay >= 1200) {
+            return ("У вас высокий уровень дохода");
+        } else if ((appData.budgetDay >= 600) && (appData.budgetDay < 1200)) {
+            return ("У вас средний уровень дохода");
+        } else if ((appData.budgetDay < 600) && (appData.budgetDay >= 0)) {
+            return ("К сожалению у вас уровень дохода ниже среднего");
+        } else {
+            return ("Что то пошло не так");
+        }
+    }
+};
 
-guess();
+appData.asking();
+appData.getExpensesMonth();
+appData.getBudget();
+appData.getTargetMonth() < 0 ? console.log("Цель не будет достигнута") : 
+console.log("Цель будет достигнута за " + appData.getTargetMonth() + " месяцев");
+console.log("Расходы за месяц " + appData.expensesMonth);
+console.log(appData.getStatusIncome());
+
+for (let key in appData) {
+    console.log("Наша програма включает в себя данные: " + "ключ: " + key + " значение: " + appData[key]);
+}
 
