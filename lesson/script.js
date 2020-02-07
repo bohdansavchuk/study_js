@@ -1,25 +1,38 @@
 "use strict";
 
-let zero = function(date) {
-
-    if (date < 10) {
-        date = '0' + date;
-    }
-
-    return date;
-};
-
 let dateTime = function() {
 
-    let currentDatetime = new Date();
-    let day = zero(currentDatetime.getDate());
-    let month = zero(currentDatetime.getMonth() + 1);
-    let year = currentDatetime.getFullYear();
-    let hours = zero(currentDatetime.getHours());
-    let minutes = zero(currentDatetime.getMinutes());
-    let seconds = zero(currentDatetime.getSeconds());
+    let currentDatetime = new Date(),
+        year = currentDatetime.getFullYear(),
+        hours = currentDatetime.getHours(),
+        minutes = currentDatetime.getMinutes(),
+        seconds = currentDatetime.getSeconds(),
+        hoursForm = ["час", "часа", "часов"],
+        minutesForm = ["минута", "минуты", "минут"],
+        secondsForm = ["секунда", "секунды", "секунд"],
+        options = {
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long'
+        };
 
-    return day + "." + month + "." + year + " - " + hours + ":" + minutes + ":" + seconds;
+    let num = function(n, forms) {  
+        n = Math.abs(n) % 100; 
+        let n1 = n % 10;
+        if (n > 10 && n < 20) {
+             return forms[2]; 
+        }
+        if (n1 > 1 && n1 < 5) { 
+            return forms[1]; 
+        }
+        if (n1 === 1) {
+             return forms[0]; 
+        }
+        return forms[2];
+    };
+    
+
+    return "Сегодня" + " " + currentDatetime.toLocaleString("ru", options) + " " + year + " года" + " - " + hours + " " + num(hours, hoursForm) + " " + minutes + " " + num(minutes, minutesForm) + " " + seconds + " "  + num(seconds, secondsForm);
 };
 
 setInterval(function () {
