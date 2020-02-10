@@ -88,6 +88,7 @@ let appData = {
     },
     addExpensesBlock: function() {
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
+        cloneExpensesItem.classList.add("new");
         cloneExpensesItem.childNodes[1].value = "";
         cloneExpensesItem.childNodes[3].value = "";
         cloneExpensesItem.childNodes[1].addEventListener('input',()=> {
@@ -105,6 +106,7 @@ let appData = {
     },
     addIncomeBlock: function() {
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        cloneIncomeItem.classList.add("new");
         cloneIncomeItem.childNodes[1].value = "";
         cloneIncomeItem.childNodes[3].value = "";
         cloneIncomeItem.childNodes[1].addEventListener('input',()=> {
@@ -217,17 +219,30 @@ let appData = {
     },
     getInputsBlocked: function(){
         expensesItem.disabled = true;
-        textInput.forEach(function(input){
-            input.disabled = true;
-        });
-        numberInput.forEach(function(input){
-            input.disabled = true;
+        buttonFirst.disabled = true;
+        buttonSecond.disabled = true;
+        let inputTypeText = document.querySelectorAll('[type="text"]');
+        inputTypeText.forEach(function(input){
+            input.disabled = "true";
         });
         start.style.display = "none";
         cancel.style.display = "block";        
     },
     reset: function() {
         expensesItem.disabled = false;
+        buttonFirst.disabled = false;
+        buttonSecond.disabled = false;
+        buttonFirst.style.display = "block";
+        buttonSecond.style.display = "block";
+        rangeTitle.textContent = 1;
+        range.value = "1";
+        start.style.display = "block";
+        cancel.style.display = "none"; 
+        let newInputs = document.querySelectorAll(".new");
+        let inputTypeText = document.querySelectorAll('[type="text"]');
+        newInputs.forEach(function(input){
+            input.remove();
+        });
         textInput.forEach(function(input){
             input.disabled = false;
         });
@@ -236,11 +251,8 @@ let appData = {
         });
         inputTypeText.forEach(function(input){
             input.value = "";
+            input.disabled = false;
         });
-        range.value = "1";
-        rangeTitle.textContent = 1;
-        start.style.display = "block";
-        cancel.style.display = "none"; 
         this.income = {};
         this.incomeMonth = 0;
         this.addIncome = [];
