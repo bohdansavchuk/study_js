@@ -1,41 +1,35 @@
-"use strict";
+window.addEventListener('DOMContentLoaded', function(){
 
-let dateTime = function() {
+    "use strict";
 
-    let currentDatetime = new Date(),
-        year = currentDatetime.getFullYear(),
-        hours = currentDatetime.getHours(),
-        minutes = currentDatetime.getMinutes(),
-        seconds = currentDatetime.getSeconds(),
-        hoursForm = ["час", "часа", "часов"],
-        minutesForm = ["минута", "минуты", "минут"],
-        secondsForm = ["секунда", "секунды", "секунд"],
-        options = {
-            month: 'long',
-            day: 'numeric',
-            weekday: 'long'
-        };
+    const getHello = document.getElementById('hello'),
+        getToday = document.getElementById('today'),
+        getTime = document.getElementById('time'),
+        getDays = document.getElementById('days');
 
-    let num = function(n, forms) {  
-        n = Math.abs(n) % 100; 
-        let n1 = n % 10;
-        if (n > 10 && n < 20) {
-             return forms[2]; 
+    function getData() {
+        let date = new Date(),
+        hours = date.getHours(),
+        weekDay = date.toLocaleString('ru', {weekday: 'long'}),
+        time = date.toLocaleTimeString('en'),  
+        daysToNewYear = Math.floor((Date.parse('31 december 2020') - Date.now()) / 1000 / 60 / 60 / 24);
+
+        if (hours <= 6) {
+            getHello.textContent = 'Доброй ночи!';
+        } else if (hours > 6 && hours <= 10) {
+            getHello.textContent = 'Доброе утро!';
+        } else if (hours > 10 && hours <= 18) {
+            getHello.textContent = 'Добрый день!';
+        } else {
+            getHello.textContent = 'Добрый вечер!';
         }
-        if (n1 > 1 && n1 < 5) { 
-            return forms[1]; 
-        }
-        if (n1 === 1) {
-             return forms[0]; 
-        }
-        return forms[2];
-    };
-    
 
-    return "Сегодня" + " " + currentDatetime.toLocaleString("ru", options) + " " + year + " года" + " - " + hours + " " + num(hours, hoursForm) + " " + minutes + " " + num(minutes, minutesForm) + " " + seconds + " "  + num(seconds, secondsForm);
-};
+        getToday.textContent = "Сегодня: " + weekDay;
+        getTime.textContent = "Текущее время: " + ("0" + time);
+        getDays.textContent = "До Нового Года осталось " + daysToNewYear + " дней!";
+    }
 
-setInterval(function () {
-    document.getElementById('time').innerHTML = dateTime();
-}, 1000);
+    getData();
+    setInterval(getData, 1000);
+});
 
