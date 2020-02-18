@@ -68,6 +68,8 @@ class AppData {
         this.getBudget();
         this.showResult();
         this.getInputsBlocked();
+        
+        this.addInfo();
     }
 
     showResult() {
@@ -261,6 +263,8 @@ class AppData {
         this.budgetMonth = 0;
         this.expensesMonth = 0;
         this.expensesQuestion = [];
+
+        localStorage.clear();
     }
 
     changePercent() {
@@ -299,6 +303,27 @@ class AppData {
             depositBank.removeEventListener("change", this.changePercent);
         }
     }
+
+    addInfo() {
+        localStorage.budgetMon = budgetMonth.value;
+        localStorage.budgetDay = budgetDay.value;
+        localStorage.expensesMonth = expensesMonth.value;
+        localStorage.addIncome = addIncome.value;
+        localStorage.addExpensesValue = addExpensesValue.value;
+        localStorage.incomePeriod = incomePeriod.value;
+        localStorage.targetMonth = targetMonth.value;
+    }
+
+    getInfo (){
+        budgetMonth.value = localStorage.budgetMonth;
+        budgetDay.value = localStorage.budgetDay;
+        expensesMonth.value = localStorage.expensesMonth;
+        addIncome.value = localStorage.addIncome;
+        addExpensesValue.value = localStorage.addExpensesValue;
+        incomePeriod.value = localStorage.incomePeriod;
+        targetMonth.value = localStorage.targetMonth;
+        this.getInputsBlocked();
+    }
     
     eventListeners(){
         start.addEventListener("click", this.start.bind(this));
@@ -324,11 +349,15 @@ class AppData {
         this.getInputText();
     
         this.blockButton();
+
+        this.getInfo();
+
     }
 }
 
 const appData = new AppData();
 
 appData.eventListeners();
+
 
 
