@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', function(){
         getDays = document.getElementById('days');
 
     function getData() {
+
         let date = new Date(),
         hours = date.getHours(),
         weekDay = date.toLocaleString('ru', {weekday: 'long'}),
@@ -25,7 +26,7 @@ window.addEventListener('DOMContentLoaded', function(){
         }
 
         getToday.textContent = "Сегодня: " + weekDay;
-        getTime.textContent = "Текущее время: " + ("0" + time);
+        getTime.textContent = "Текущее время: " +  time;
         getDays.textContent = "До Нового Года осталось " + daysToNewYear + " дней!";
     }
 
